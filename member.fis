@@ -1,0 +1,68 @@
+[System]
+Name='member'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=17
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Io/Ip'
+Range=[0 1]
+NumMFs=4
+MF1='L':'trapmf',[-0.0527 -0.0261 5e-05 0.00058]
+MF2='ML':'trapmf',[-0.3322 -0.2892 0.00058 0.0256]
+MF3='MH':'trapmf',[-0.01027 0.00058 0.03736 0.2]
+MF4='H':'trapmf',[0.0373589822667695 0.21355898226677 1.43555898226677 2.43555898226677]
+
+[Input2]
+Name='In/Ip'
+Range=[0 1]
+NumMFs=4
+MF1='L':'trapmf',[-0.299 -0.1 0.102 0.15]
+MF2='ML':'trapmf',[0.17 0.39 0.629 1]
+MF3='MH':'trapmf',[0.15 1 1 1.5]
+MF4='H':'trapmf',[0.9507 1.121 1.321 2]
+
+[Input3]
+Name='Ip/Ir'
+Range=[0 20]
+NumMFs=4
+MF1='L':'trapmf',[-3 -0.3333 2.2 2.4]
+MF2='ML':'trapmf',[2.2 10.937 10.937 20.625]
+MF3='MH':'trapmf',[2.4 20.625 20.625 25]
+MF4='H':'trapmf',[20.625 30 40 50]
+
+[Output1]
+Name='Type_of_Fault'
+Range=[-1 5]
+NumMFs=5
+MF1='NOR':'trimf',[-1 0 1]
+MF2='SLG':'trimf',[0 1 2]
+MF3='LL':'trimf',[1 2 3]
+MF4='DLG':'trimf',[2 3 4]
+MF5='TLG':'trimf',[3 4 5]
+
+[Rules]
+1 1 1, 1 (0.96) : 1
+2 2 1, 2 (0.87) : 1
+2 3 1, 2 (1) : 1
+4 3 1, 2 (1) : 1
+4 4 2, 2 (0.98) : 1
+-4 3 2, 2 (0.2) : 1
+1 3 0, 3 (0.63) : 1
+1 4 0, 3 (0.5) : 1
+2 2 2, 4 (0.57) : 1
+2 3 2, 4 (1) : 1
+3 2 2, 4 (0.57) : 1
+3 3 2, 4 (0.2) : 1
+3 2 3, 4 (0.6) : 1
+3 3 3, 4 (1) : 1
+4 2 2, 4 (1) : 1
+1 1 3, 5 (0.95) : 1
+1 1 4, 5 (0.8) : 1
